@@ -1,0 +1,35 @@
+<div class="col-md-12">
+  <div class="task">
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <td>#</td>
+        <td>ID</td>
+        <td>USERNAME</td>
+        <td>START</td>
+        <td>END</td>
+        <td>SEAT</td>
+        <td>REMARK</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr>
+          <td>#</td>
+          <td><%= task.id %></td>
+          <td><%= task.username %></td>
+          <td><%= (task.start.to_i)/60 %> o'clock</td>
+          <td><%= (task.end.to_i)/60 %> o'clock</td>
+          <td><%= Seat.find(task.seat).seat_name %></td>
+          <td><%= task.remark %></td>
+          <td>
+              <%= link_to("Edit", edit_task_path(task), class: "btn btn-sm btn-default")%>
+              <%= link_to("Delete", task_path(task),    class: "btn btn-sm btn-default",
+                          method: :delete, data: { confirm: "Are you sure?" } )%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
